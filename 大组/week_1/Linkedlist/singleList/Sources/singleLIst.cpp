@@ -23,9 +23,10 @@ int main() {
 		case 6:destroyList();				        //销毁
 			break;
 		case 7:	insertList();						//插入
-			cout << "test3" << endl;
 			break;
-		default:cout << "输入有误，请您重新输入！" << endl;;
+		default:cout << "输入有误，请您重新输入！" << endl;
+			system("pause");
+			system("cls");
 			break;
 		}
 	}

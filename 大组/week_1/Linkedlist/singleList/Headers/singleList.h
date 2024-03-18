@@ -3,6 +3,7 @@
 using namespace std;
 void showMenu()
 {
+	cout << "单链表ADT" << endl;
 	cout << "请输入指令:" << endl;
 	cout << "1:初始化空链表" << endl;
 	cout << "2:添加链表" << endl;
@@ -34,7 +35,7 @@ singleList* creat() {
 	}
 	else {
 		cout << "链表已完成初始化，请勿重复操作！" << endl;
-		return 0;
+		
 	}
 }
 
@@ -117,26 +118,58 @@ singleList* findData(string data) {
 
 void insertList() {
 	if (head == NULL) {
-		cout << "当前链表为空，请先添加链表！";
+		cout << "当前链表为空，请先添加链表！" << endl;
+		system("pause");
+		system("cls");
 		return;
 	}
-	cout << "请输入您要插入的数据";
+	cout << "请输入您要插入的数据:";
 	string insertData, oriData;
 	cin >> insertData;
-	cout << "请您输入您要插入到哪个数据之后:";
+	cout << "请您输入您要插入到哪个数据之后（若需插入到表头之前请输入*head）:";
 	cin >> oriData;
 	singleList* p1;
 	singleList* p2;
 	singleList* p3;
-	p2 = p1 = findData(oriData);
-	p3 = p1->next;
-	p1 = new singleList;
-	p2->next = p1;
-	p1->data = insertData;
-	p1->next = p3;
-	cout << "数据插入成功!" << endl;
-	system("pause");
-	system("cls");
+	if (oriData=="*head") {				//插入表头
+		p1 = head;
+		p3 = new singleList;
+		p3->data = insertData;
+		p3->next = p1;
+		head = p3;
+		cout << "数据插入成功!" << endl;
+		system("pause");
+		system("cls");
+	}
+	else {
+		p2 = p1 = findData(oriData);
+		if (p1 == NULL) {
+			cout << "您输入的数字不存在！" << endl;
+			system("pause");
+			system("cls");
+			return;
+		}
+		if (p1->next != NULL) {
+			p3 = p1->next;
+			p1 = new singleList;
+			p2->next = p1;
+			p1->data = insertData;
+			p1->next = p3;
+			cout << "数据插入成功!" << endl;
+			system("pause");
+			system("cls");
+		}
+		else if (p1->next == NULL) {			//插入表尾
+			p3 = new singleList;
+			p3->data = insertData;
+			p3->next = NULL;
+			p1->next = p3;
+			cout << "数据插入成功!" << endl;
+			system("pause");
+			system("cls");
+		}
+	}
+
 
 }
 void destroyList() {
@@ -161,12 +194,16 @@ void deleteList() {
 	p1 = p2 = head;
 	if (head == NULL) {
 		cout << "当前链表为空，请先创建链表" << endl;
+		system("pause");
+		system("cls");
 		return;
 	}
 	if (head->data == deleteData) {
 		head = p1->next;
 		free(p2);
 		cout << "删除成功！" << endl;
+		system("pause");
+		system("cls");
 		return;
 	}
 	while (true) {
@@ -180,6 +217,8 @@ void deleteList() {
 				p2->next = NULL;
 			}
 			cout << "删除成功！" << endl;
+			system("pause");
+			system("cls");
 			break;
 		}
 		else {
@@ -188,6 +227,8 @@ void deleteList() {
 		}
 		if (p1 == NULL) {
 			cout << "该数据不存在！" << endl;
+			system("pause");
+			system("cls");
 			break;
 		}
 	}
